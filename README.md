@@ -57,7 +57,7 @@ MyTradePrototype/
 │  └─ Details.png
 │
 ├─ Program.cs
-└─ appsettings.json
+└─ appsettings.json```
 
 ---
 
