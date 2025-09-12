@@ -27,33 +27,35 @@ Bu proje, ASP.NET Core ve Entity Framework Core kullanılarak geliştirilmiş ba
 
 ## 📂 Proje Yapısı
 
+```text
 MyTradePrototype/
-│
 ├─ Controllers/
-│ ├─ TradeController.cs
-│ └─ HomeController.cs
+│  ├─ TradeController.cs
+│  └─ HomeController.cs
 │
 ├─ Data/
-│ └─ ApplicationDbContext.cs
+│  └─ ApplicationDbContext.cs
 │
 ├─ Models/
-│ └─ Trade.cs
+│  └─ Trade.cs
 │
 ├─ Views/
-│ ├─ Trade/
-│ │ ├─ Index.cshtml
-│ │ ├─ Create.cshtml
-│ │ ├─ Details.cshtml
-│ │ ├─ Edit.cshtml
-│ │ └─ Delete.cshtml
-│ └─ Home/
-│ └─ Index.cshtml
+│  ├─ Trade/
+│  │  ├─ Index.cshtml
+│  │  ├─ Create.cshtml
+│  │  ├─ Details.cshtml
+│  │  ├─ Edit.cshtml
+│  │  └─ Delete.cshtml
+│  └─ Home/
+│     └─ Index.cshtml
 │
 ├─ wwwroot/
+│
 ├─ Screenshots/
-│ ├─ Index.png
-│ ├─ Create.png
-│ └─ Details.png
+│  ├─ Index.png
+│  ├─ Create.png
+│  └─ Details.png
+│
 ├─ Program.cs
 └─ appsettings.json
 
@@ -84,13 +86,13 @@ Projeyi çalıştırmak için:
 ## 📸 Ekran Görüntüleri
 
 **Index Sayfası**
-![Index](Screenshots/index.png)
+![Index](screenshots/index.png)
 
 **Create Sayfası**
-![Create](Screenshots/create.png)
+![Create](screenshots/create.png)
 
 **Details Sayfası**
-![Details](Screenshots/details.png)
+![Details](screenshots/details.png)
 
 ---
 
