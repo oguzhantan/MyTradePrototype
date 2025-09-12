@@ -21,7 +21,7 @@ Bu proje, ASP.NET Core ve Entity Framework Core kullanılarak geliştirilmiş ba
 - ASP.NET Core MVC
 - Entity Framework Core
 - SQL Server (LocalDB)
-- Bootstrap (Opsiyonel, ileride eklenebilir)
+- Bootstrap (opsiyonel, ileride eklenebilir)
 
 ---
 
@@ -50,14 +50,14 @@ MyTradePrototype/
 │     └─ Index.cshtml
 │
 ├─ wwwroot/
-│
 ├─ Screenshots/
 │  ├─ Index.png
 │  ├─ Create.png
 │  └─ Details.png
 │
 ├─ Program.cs
-└─ appsettings.json```
+└─ appsettings.json
+```text
 
 ---
 
