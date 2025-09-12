@@ -1,0 +1,38 @@
+﻿@model MyTradePrototype.Models.Trade
+
+@{
+    ViewData["Title"] = "Trade Details";
+}
+
+<h2>Trade Details</h2>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">ID</dt>
+        <dd class="col-sm-10">@Model.Id</dd>
+
+        <dt class="col-sm-2">Product Name</dt>
+        <dd class="col-sm-10">@Model.ProductName</dd>
+
+        <dt class="col-sm-2">Quantity</dt>
+        <dd class="col-sm-10">@Model.Quantity</dd>
+
+        <dt class="col-sm-2">Price</dt>
+        <dd class="col-sm-10">@Model.Price</dd>
+
+        <dt class="col-sm-2">Buyer</dt>
+        <dd class="col-sm-10">@Model.Buyer</dd>
+
+        <dt class="col-sm-2">Seller</dt>
+        <dd class="col-sm-10">@Model.Seller</dd>
+
+        <dt class="col-sm-2">Trade Date</dt>
+        <dd class="col-sm-10">@Model.TradeDate.ToString("yyyy-MM-dd")</dd>
+    </dl>
+</div>
+
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</p>

@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">🚀 MyTradePrototype</h1>
+    <p>Hoş geldin! Buradan trade kayıtlarını yönetebilirsin.</p>
+
+    <hr />
+
+    <div class="mt-4">
+        <a asp-controller="Trade" asp-action="Index" class="btn btn-primary m-2">📋 Trade List</a>
+        <a asp-controller="Trade" asp-action="Create" class="btn btn-success m-2">➕ New Trade</a>
+        <a asp-controller="Trade" asp-action="Details" asp-route-id="1" class="btn btn-info m-2">🔎 Sample Detail (id=1)</a>
+    </div>
+</div>
