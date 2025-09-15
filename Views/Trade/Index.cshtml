@@ -4,36 +4,54 @@
     ViewData["Title"] = "Trade List";
 }
 
-<h2>Trade List</h2>
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<h2 class="mb-3">Trade List</h2>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Yeni Trade Ekle</a>
+    <a asp-action="Create" class="btn btn-primary mb-3">Yeni Trade Ekle</a>
 </p>
 
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Product Name</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Buyer</th>
-            <th>Seller</th>
-            <th>Trade Date</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var trade in Model)
-        {
-            <tr style="cursor:pointer;" onclick="location.href='@Url.Action("Details", "Trade", new { id = trade.Id })'">
-                <td>@trade.Id</td>
-                <td>@trade.ProductName</td>
-                <td>@trade.Quantity</td>
-                <td>@trade.Price</td>
-                <td>@trade.Buyer</td>
-                <td>@trade.Seller</td>
-                <td>@trade.TradeDate.ToString("yyyy-MM-dd")</td>
+<div class="table-responsive">
+    <table class="table table-hover table-striped align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Id</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Buyer</th>
+                <th>Seller</th>
+                <th>Trade Date</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var trade in Model)
+            {
+                <tr style="cursor:pointer;" onclick="location.href='@Url.Action("Details", "Trade", new { id = trade.Id })'">
+                    <td>@trade.Id</td>
+                    <td>@trade.ProductName</td>
+                    <td>@trade.Quantity</td>
+                    <td>@trade.Price</td>
+                    <td>@trade.Buyer</td>
+                    <td>@trade.Seller</td>
+                    <td>@trade.TradeDate.ToString("yyyy-MM-dd")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

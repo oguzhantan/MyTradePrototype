@@ -32,17 +32,27 @@ namespace MyTradePrototype.Controllers
         // POST: Trade/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Trade trade) 
+        public async Task<IActionResult> Create(Trade trade)
         {
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
-                _context.Trades.Add(trade);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _context.Add(trade);
+                    await _context.SaveChangesAsync();
+
+                    TempData["SuccessMessage"] = "Trade successfully created!";
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception)
+                {
+                    TempData["ErrorMessage"] = "An error occurred while creating the trade.";
+                }
             }
 
             return View(trade);
         }
+
         // GET: Trade/Details/5
         /*
              Açıklama:
@@ -89,7 +99,11 @@ namespace MyTradePrototype.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Trade trade)
         {
-            if (id != trade.Id) return NotFound();
+            if (id != trade.Id)
+            {
+                TempData["ErrorMessage"] = "Trade not found!";
+                return RedirectToAction(nameof(Index));
+            }
 
             if (ModelState.IsValid)
             {
@@ -97,18 +111,28 @@ namespace MyTradePrototype.Controllers
                 {
                     _context.Update(trade);
                     await _context.SaveChangesAsync();
+
+                    TempData["SuccessMessage"] = "Trade successfully updated!";
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!_context.Trades.Any(e => e.Id == trade.Id))
-                        return NotFound();
+                    if (!TradeExists(trade.Id))
+                    {
+                        TempData["ErrorMessage"] = "Trade no longer exists!";
+                        return RedirectToAction(nameof(Index));
+                    }
                     else
+                    {
+                        TempData["ErrorMessage"] = "An error occurred while updating the trade.";
                         throw;
+                    }
                 }
-                return RedirectToAction(nameof(Index));
             }
+
             return View(trade);
         }
+
 
         // GET: Trade/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -134,6 +158,11 @@ namespace MyTradePrototype.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+        private bool TradeExists(int id)
+        {
+            return _context.Trades.Any(e => e.Id == id);
+        }
+
     }
 }
 /*
