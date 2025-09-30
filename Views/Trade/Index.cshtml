@@ -4,10 +4,17 @@
     ViewData["Title"] = "Trade List";
 }
 
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">📋 Trade List</h2>
+    <a asp-action="Create" class="btn btn-success">
+        <i class="bi bi-plus-circle"></i> Yeni Trade Ekle
+    </a>
+</div>
+
 @if (TempData["SuccessMessage"] != null)
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        @TempData["SuccessMessage"]
+        <i class="bi bi-check-circle"></i> @TempData["SuccessMessage"]
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
@@ -15,20 +22,14 @@
 @if (TempData["ErrorMessage"] != null)
 {
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        @TempData["ErrorMessage"]
+        <i class="bi bi-exclamation-triangle"></i> @TempData["ErrorMessage"]
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
 
-<h2 class="mb-3">Trade List</h2>
-
-<p>
-    <a asp-action="Create" class="btn btn-primary mb-3">Yeni Trade Ekle</a>
-</p>
-
-<div class="table-responsive">
-    <table class="table table-hover table-striped align-middle">
-        <thead class="table-light">
+<div class="table-responsive shadow-sm rounded">
+    <table class="table table-hover align-middle mb-0">
+        <thead class="table-dark">
             <tr>
                 <th>Id</th>
                 <th>Product Name</th>
@@ -37,19 +38,40 @@
                 <th>Buyer</th>
                 <th>Seller</th>
                 <th>Trade Date</th>
+                <th class="text-center">Actions</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var trade in Model)
+            @if (Model != null && Model.Any())
             {
-                <tr style="cursor:pointer;" onclick="location.href='@Url.Action("Details", "Trade", new { id = trade.Id })'">
-                    <td>@trade.Id</td>
-                    <td>@trade.ProductName</td>
-                    <td>@trade.Quantity</td>
-                    <td>@trade.Price</td>
-                    <td>@trade.Buyer</td>
-                    <td>@trade.Seller</td>
-                    <td>@trade.TradeDate.ToString("yyyy-MM-dd")</td>
+                foreach (var trade in Model)
+                {
+                    <tr>
+                        <td>@trade.Id</td>
+                        <td>@trade.ProductName</td>
+                        <td>@trade.Quantity</td>
+                        <td>@trade.Price.ToString("C")</td>
+                        <td>@trade.Buyer</td>
+                        <td>@trade.Seller</td>
+                        <td>@trade.TradeDate.ToString("yyyy-MM-dd")</td>
+                        <td class="text-center">
+                            <a asp-action="Details" asp-route-id="@trade.Id" class="btn btn-sm btn-info">
+                                <i class="bi bi-eye"></i>
+                            </a>
+                            <a asp-action="Edit" asp-route-id="@trade.Id" class="btn btn-sm btn-warning">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@trade.Id" class="btn btn-sm btn-danger">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8" class="text-center text-muted">Henüz trade kaydı yok.</td>
                 </tr>
             }
         </tbody>

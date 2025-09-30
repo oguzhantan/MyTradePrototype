@@ -32,7 +32,6 @@ C:\Users\tanno\source\repos\MyTradePrototype\MyTradePrototype\obj\Debug\net9.0\r
 C:\Users\tanno\source\repos\MyTradePrototype\MyTradePrototype\obj\Debug\net9.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\tanno\source\repos\MyTradePrototype\MyTradePrototype\obj\Debug\net9.0\scopedcss\bundle\MyTradePrototype.styles.css
 C:\Users\tanno\source\repos\MyTradePrototype\MyTradePrototype\obj\Debug\net9.0\scopedcss\projectbundle\MyTradePrototype.bundle.scp.css
-C:\Users\tanno\source\repos\MyTradePrototype\MyTradePrototype\obj\Debug\net9.0\compressed\z8z8u44ar2-b9sayid5wm.gz
 C:\Users\tanno\source\repos\MyTradePrototype\MyTradePrototype\obj\Debug\net9.0\compressed\3fnjy2l7nd-61n19gt1b8.gz
 C:\Users\tanno\source\repos\MyTradePrototype\MyTradePrototype\obj\Debug\net9.0\compressed\l3t47m2pvt-xtxxf3hu2r.gz
 C:\Users\tanno\source\repos\MyTradePrototype\MyTradePrototype\obj\Debug\net9.0\compressed\lkfo5fpbsa-bqjiyaj88i.gz
@@ -230,3 +229,4 @@ C:\Users\tanno\source\repos\MyTradePrototype\MyTradePrototype\bin\Debug\net9.0\r
 C:\Users\tanno\source\repos\MyTradePrototype\MyTradePrototype\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\tanno\source\repos\MyTradePrototype\MyTradePrototype\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Users\tanno\source\repos\MyTradePrototype\MyTradePrototype\obj\Debug\net9.0\MyTradePrototype.sourcelink.json
+C:\Users\tanno\source\repos\MyTradePrototype\MyTradePrototype\obj\Debug\net9.0\compressed\z8z8u44ar2-ktkj6bz9j4.gz

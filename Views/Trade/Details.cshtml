@@ -22,28 +22,40 @@
     </div>
 }
 
-<div class="card shadow-sm">
+<div class="card shadow-sm mb-3">
+    <div class="card-header">
+        Trade Bilgileri
+    </div>
     <div class="card-body">
         <dl class="row">
-            <dt class="col-sm-3">Product Name</dt>
+            <dt class="col-sm-3">Ürün Adı</dt>
             <dd class="col-sm-9">@Model.ProductName</dd>
 
-            <dt class="col-sm-3">Quantity</dt>
+            <dt class="col-sm-3">Miktar</dt>
             <dd class="col-sm-9">@Model.Quantity</dd>
 
-            <dt class="col-sm-3">Price</dt>
-            <dd class="col-sm-9">@Model.Price</dd>
+            <dt class="col-sm-3">Fiyat</dt>
+            <dd class="col-sm-9">@Model.Price.ToString("C")</dd>
 
-            <dt class="col-sm-3">Buyer</dt>
+            <dt class="col-sm-3">Alıcı</dt>
             <dd class="col-sm-9">@Model.Buyer</dd>
 
-            <dt class="col-sm-3">Seller</dt>
+            <dt class="col-sm-3">Satıcı</dt>
             <dd class="col-sm-9">@Model.Seller</dd>
 
-            <dt class="col-sm-3">Trade Date</dt>
+            <dt class="col-sm-3">Tarih</dt>
             <dd class="col-sm-9">@Model.TradeDate.ToString("yyyy-MM-dd")</dd>
         </dl>
-        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Düzenle</a>
-        <a asp-action="Index" class="btn btn-secondary">Listeye Dön</a>
+    </div>
+    <div class="card-footer text-end">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning me-2">
+            <i class="bi bi-pencil-square"></i> Düzenle
+        </a>
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger me-2">
+            <i class="bi bi-trash"></i> Sil
+        </a>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="bi bi-arrow-left-circle"></i> Listeye Dön
+        </a>
     </div>
 </div>

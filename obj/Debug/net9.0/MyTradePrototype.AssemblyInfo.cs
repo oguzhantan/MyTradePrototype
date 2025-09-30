@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MyTradePrototype")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f8138ac2835daf9106ff418ca417fc2d438525ff")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cf391a2526b75a2a3fc1b2f9e7d39d1816e558fb")]
 [assembly: System.Reflection.AssemblyProductAttribute("MyTradePrototype")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MyTradePrototype")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

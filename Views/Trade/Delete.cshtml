@@ -32,7 +32,7 @@
             <dd class="col-sm-9">@Model.TradeDate.ToString("yyyy-MM-dd")</dd>
         </dl>
 
-        <form asp-action="DeleteConfirmed">
+        <form asp-action="DeleteConfirmed" method="post">
             <input type="hidden" asp-for="Id" />
             <button type="submit" class="btn btn-danger">Sil</button>
             <a asp-action="Index" class="btn btn-secondary">İptal</a>

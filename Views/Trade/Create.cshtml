@@ -5,9 +5,7 @@
 }
 
 <h2>Create New Trade</h2>
-
 <hr />
-
 
 @if (TempData["SuccessMessage"] != null)
 {
@@ -58,7 +56,7 @@
 
     <div class="mb-3">
         <label asp-for="TradeDate" class="form-label"></label>
-        <input asp-for="TradeDate" class="form-control" type="date" />
+        <input asp-for="TradeDate" class="form-control" type="date" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
         <span asp-validation-for="TradeDate" class="text-danger"></span>
     </div>
 

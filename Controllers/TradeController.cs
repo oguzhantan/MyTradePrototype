@@ -26,6 +26,10 @@ namespace MyTradePrototype.Controllers
         // GET: Trade/Create
         public IActionResult Create()
         {
+            var model = new Trade
+            {
+                TradeDate = DateTime.Today
+            };
             return View();
         }
 
@@ -34,24 +38,32 @@ namespace MyTradePrototype.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Trade trade)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                try
-                {
-                    _context.Add(trade);
-                    await _context.SaveChangesAsync();
+                TempData["ErrorMessage"] = "Lütfen tüm alanları doğru doldurun.";
+                return View(trade);
+            }
 
-                    TempData["SuccessMessage"] = "Trade successfully created!";
-                    return RedirectToAction(nameof(Index));
-                }
-                catch (Exception)
-                {
-                    TempData["ErrorMessage"] = "An error occurred while creating the trade.";
-                }
+            try
+            {
+                _context.Add(trade);
+                await _context.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "Trade başarıyla oluşturuldu!";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException dbEx)
+            {
+                TempData["ErrorMessage"] = $"Veritabanı hatası: {dbEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Bir hata oluştu: {ex.Message}";
             }
 
             return View(trade);
         }
+
 
         // GET: Trade/Details/5
         /*
@@ -78,19 +90,14 @@ namespace MyTradePrototype.Controllers
             return View(trade);
         }
 
-        // GET: Trades/Edit/5
+        // GET: Trade/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var trade = await _context.Trades.FindAsync(id);
-            if (trade == null)
-            {
-                return NotFound();
-            }
+            if (trade == null) return NotFound();
+
             return View(trade);
         }
 
@@ -99,39 +106,33 @@ namespace MyTradePrototype.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Trade trade)
         {
-            if (id != trade.Id)
+            if (id != trade.Id) return NotFound();
+
+            if (!ModelState.IsValid)
+                return View(trade);
+
+            try
             {
-                TempData["ErrorMessage"] = "Trade not found!";
+                _context.Update(trade);
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Trade başarıyla güncellendi!";
                 return RedirectToAction(nameof(Index));
             }
-
-            if (ModelState.IsValid)
+            catch (DbUpdateConcurrencyException)
             {
-                try
-                {
-                    _context.Update(trade);
-                    await _context.SaveChangesAsync();
-
-                    TempData["SuccessMessage"] = "Trade successfully updated!";
-                    return RedirectToAction(nameof(Index));
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!TradeExists(trade.Id))
-                    {
-                        TempData["ErrorMessage"] = "Trade no longer exists!";
-                        return RedirectToAction(nameof(Index));
-                    }
-                    else
-                    {
-                        TempData["ErrorMessage"] = "An error occurred while updating the trade.";
-                        throw;
-                    }
-                }
+                if (!_context.Trades.Any(e => e.Id == trade.Id))
+                    return NotFound();
+                else
+                    throw;
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", $"Bir hata oluştu: {ex.Message}");
             }
 
             return View(trade);
         }
+
 
 
         // GET: Trade/Delete/5
@@ -139,14 +140,16 @@ namespace MyTradePrototype.Controllers
         {
             if (id == null) return NotFound();
 
-            var trade = await _context.Trades.FirstOrDefaultAsync(t => t.Id == id);
+            var trade = await _context.Trades
+                .FirstOrDefaultAsync(m => m.Id == id);
+
             if (trade == null) return NotFound();
 
             return View(trade);
         }
 
-        // POST: Trade/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // POST: Trade/DeleteConfirmed/5
+        [HttpPost, ActionName("DeleteConfirmed")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
@@ -155,16 +158,18 @@ namespace MyTradePrototype.Controllers
             {
                 _context.Trades.Remove(trade);
                 await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Trade başarıyla silindi!";
             }
+            else
+            {
+                TempData["ErrorMessage"] = "Trade bulunamadı!";
+            }
+
             return RedirectToAction(nameof(Index));
         }
-        private bool TradeExists(int id)
-        {
-            return _context.Trades.Any(e => e.Id == id);
-        }
-
     }
 }
+
 /*
  Bu kodda şunlar var:
 

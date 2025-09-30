@@ -1,16 +1,105 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model MyTradePrototype.Models.ViewModels.HomeIndexViewModel;
+
+@{
+    ViewData["Title"] = "Ana Sayfa";
 }
 
-<div class="text-center">
-    <h1 class="display-4">🚀 MyTradePrototype</h1>
-    <p>Hoş geldin! Buradan trade kayıtlarını yönetebilirsin.</p>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">MyTradePrototype Dashboard</h1>
 
-    <hr />
+    <!-- Özet Kartlar -->
+    <div class="row mb-5">
+        <div class="col-md-4 mb-3">
+            <div class="card text-white bg-primary shadow-sm h-100">
+                <div class="card-body d-flex align-items-center">
+                    <i class="bi bi-bar-chart-line-fill display-4 me-3"></i>
+                    <div>
+                        <h5 class="card-title">Toplam Trade</h5>
+                        <p class="card-text display-6">@Model.TotalTrades</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card text-white bg-success shadow-sm h-100">
+                <div class="card-body d-flex align-items-center">
+                    <i class="bi bi-currency-dollar display-4 me-3"></i>
+                    <div>
+                        <h5 class="card-title">Toplam Trade Değeri</h5>
+                        <p class="card-text display-6">@Model.TotalValue.ToString("C")</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card text-white bg-warning shadow-sm h-100">
+                <div class="card-body d-flex align-items-center">
+                    <i class="bi bi-clock-history display-4 me-3"></i>
+                    <div>
+                        <h5 class="card-title">Son Eklenen Trade</h5>
+                        <p class="card-text display-6">
+                            @(Model.RecentTrades != null && Model.RecentTrades.Any() && Model.RecentTrades.First().TradeDate.HasValue
+                                                        ? Model.RecentTrades.First().TradeDate.Value.ToString("yyyy-MM-dd")
+                                                        : "-")
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <div class="mt-4">
-        <a asp-controller="Trade" asp-action="Index" class="btn btn-primary m-2">📋 Trade List</a>
-        <a asp-controller="Trade" asp-action="Create" class="btn btn-success m-2">➕ New Trade</a>
-        <a asp-controller="Trade" asp-action="Details" asp-route-id="1" class="btn btn-info m-2">🔎 Sample Detail (id=1)</a>
+    <!-- Son 5 Trade -->
+    <h3 class="mb-3">Son Trade’ler</h3>
+    @if (Model.RecentTrades != null && Model.RecentTrades.Any())
+    {
+        <div class="table-responsive shadow-sm rounded">
+            <table class="table table-hover table-striped align-middle">
+                <thead class="table-dark">
+                    @foreach (var trade in Model.RecentTrades)
+                    {
+                        <tr>
+                            <td>@trade.ProductName</td>
+                            <td>@trade.Quantity</td>
+                            <td>@trade.Price.ToString("C")</td>
+                            <td>@trade.Buyer</td>
+                            <td>@trade.Seller</td>
+                            <td>@(trade.TradeDate != null && trade.TradeDate != DateTime.MinValue ? trade.TradeDate.Value.ToString("yyyy-MM-dd") : "-")</td>
+                        </tr>
+                    }
+
+                </thead>
+                <tbody>
+                    @foreach (var trade in Model.RecentTrades)
+                    {
+                        <tr class="align-middle">
+                            <td>@trade.ProductName</td>
+                            <td>@trade.Quantity</td>
+                            <td>@trade.Price.ToString("C")</td>
+                            <td>@trade.Buyer</td>
+                            <td>@trade.Seller</td>
+                            <th class="text-center">Actions</th>
+                            <td>
+                                @(trade.TradeDate.HasValue? trade.TradeDate.Value.ToString("yyyy-MM-dd") : "-")
+                            </td>
+                            <td>
+                                <a asp-controller="Trade" asp-action="Edit" asp-route-id="@trade.Id" class="btn btn-warning btn-sm me-1">Düzenle</a>
+                                <a asp-controller="Trade" asp-action="Details" asp-route-id="@trade.Id" class="btn btn-info btn-sm me-1">Detay</a>
+                                <a asp-controller="Trade" asp-action="Delete" asp-route-id="@trade.Id" class="btn btn-danger btn-sm">Sil</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <p class="text-muted">Henüz trade kaydı bulunmamaktadır.</p>
+    }
+
+    <div class="mt-4 text-center">
+        <a asp-controller="Trade" asp-action="Index" class="btn btn-primary btn-lg shadow">
+            Tüm Trade Listesine Git
+        </a>
     </div>
 </div>
