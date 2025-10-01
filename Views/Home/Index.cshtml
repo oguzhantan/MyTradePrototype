@@ -53,35 +53,29 @@
     @if (Model.RecentTrades != null && Model.RecentTrades.Any())
     {
         <div class="table-responsive shadow-sm rounded">
-            <table class="table table-hover table-striped align-middle">
+            <table class="table table-hover align-middle mb-0">
                 <thead class="table-dark">
-                    @foreach (var trade in Model.RecentTrades)
-                    {
-                        <tr>
-                            <td>@trade.ProductName</td>
-                            <td>@trade.Quantity</td>
-                            <td>@trade.Price.ToString("C")</td>
-                            <td>@trade.Buyer</td>
-                            <td>@trade.Seller</td>
-                            <td>@(trade.TradeDate != null && trade.TradeDate != DateTime.MinValue ? trade.TradeDate.Value.ToString("yyyy-MM-dd") : "-")</td>
-                        </tr>
-                    }
-
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Buyer</th>
+                        <th>Seller</th>
+                        <th>Trade Date</th>
+                        <th >Actions</th>
+                    </tr>
                 </thead>
                 <tbody>
                     @foreach (var trade in Model.RecentTrades)
                     {
-                        <tr class="align-middle">
+                        <tr >
                             <td>@trade.ProductName</td>
                             <td>@trade.Quantity</td>
                             <td>@trade.Price.ToString("C")</td>
                             <td>@trade.Buyer</td>
                             <td>@trade.Seller</td>
-                            <th class="text-center">Actions</th>
-                            <td>
-                                @(trade.TradeDate.HasValue? trade.TradeDate.Value.ToString("yyyy-MM-dd") : "-")
-                            </td>
-                            <td>
+                            <td>@(trade.TradeDate.HasValue? trade.TradeDate.Value.ToString("yyyy-MM-dd") : "-")</td>
+                            <td >
                                 <a asp-controller="Trade" asp-action="Edit" asp-route-id="@trade.Id" class="btn btn-warning btn-sm me-1">Düzenle</a>
                                 <a asp-controller="Trade" asp-action="Details" asp-route-id="@trade.Id" class="btn btn-info btn-sm me-1">Detay</a>
                                 <a asp-controller="Trade" asp-action="Delete" asp-route-id="@trade.Id" class="btn btn-danger btn-sm">Sil</a>

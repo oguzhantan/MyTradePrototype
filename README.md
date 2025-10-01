@@ -21,7 +21,7 @@ Bu proje, ASP.NET Core ve Entity Framework Core kullanılarak geliştirilmiş ba
 - ASP.NET Core MVC
 - Entity Framework Core
 - SQL Server (LocalDB)
-- Bootstrap (opsiyonel, ileride eklenebilir)
+- Bootstrap
 
 ---
 
@@ -37,8 +37,15 @@ MyTradePrototype/
 │  └─ ApplicationDbContext.cs
 │
 ├─ Models/
-│  └─ Trade.cs
-│
+│     ├─ Trade.cs
+│     │
+│     ├─ Validation/
+│     │   └─ TradeDateValidationAttribute.cs
+│     │
+│     └─ ViewModels/
+│            ├─ HomeIndexViewModel.cs
+│            └─ Delete.cshtml
+│  
 ├─ Views/
 │  ├─ Trade/
 │  │  ├─ Index.cshtml
@@ -51,9 +58,12 @@ MyTradePrototype/
 │
 ├─ wwwroot/
 ├─ Screenshots/
-│  ├─ Index.png
-│  ├─ Create.png
-│  └─ Details.png
+│  ├─ create.png
+│  ├─ delete.png
+│  ├─ details.png
+│  ├─ edit.png
+│  ├─ home.png
+│  └─ list.png
 │
 ├─ Program.cs
 └─ appsettings.json
@@ -85,14 +95,23 @@ Projeyi çalıştırmak için:
 
 ## 📸 Ekran Görüntüleri
 
-**Index Sayfası**
-![Index](screenshots/index.png)
+**Home Sayfası**
+![Index](screenshots/home.png)
+
+**List Sayfası**
+![Create](screenshots/list.png)
+
+**Details Sayfası**
+![Details](screenshots/details.png)
+
+**Edit Sayfası**
+![Index](screenshots/edit.png)
 
 **Create Sayfası**
 ![Create](screenshots/create.png)
 
-**Details Sayfası**
-![Details](screenshots/details.png)
+**Delete Sayfası**
+![Details](screenshots/delete.png)
 
 ---
 
@@ -100,6 +119,5 @@ Projeyi çalıştırmak için:
 
 - Filtreleme ve sayfalama
 - Kullanıcı yetkilendirmesi (Authentication & Authorization)
-- Gelişmiş arayüz ve Bootstrap entegrasyonu
 - Currency, Status ve PaymentType gibi ek trade bilgileri
 - API entegrasyonu
